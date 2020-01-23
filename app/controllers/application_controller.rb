@@ -43,17 +43,16 @@ class ApplicationController < Sinatra::Base
     #binding.pry
     Recipe.find(params[:id]).tap do |recipe|
       recipe.update(
-        name: params[:id],
+        name: params[:name],
         ingredients: params[:ingredients],
         cook_time: params[:cook_time]
         )
       redirect "/recipes/#{recipe.id}"
     end
   end
-
+  #binding.pry
   delete '/recipes/:id/delete' do
-    Recipe.find(params[:id]).destroy
-    redirect '/recipes'
+    Recipe.find(params[:id]).delete
+    redirect to '/index'
   end
-
 end
